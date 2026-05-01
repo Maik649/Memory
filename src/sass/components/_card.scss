@@ -1,0 +1,37 @@
+@use 'variable' as vars;
+@use '../abstract/mixings' as resp;
+@use '../abstract/mixings' as animat;
+/*Nesting Bsp. */ 
+.ca{
+    &rd{
+        @include animat.fade-in(1.8s, 500px);
+        background-color: #b9b9b992;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 400px;
+        height: 300px;
+        margin: 20px auto;
+        text-align: center;
+        @include resp.respond(md){
+            background-color: blueviolet;
+        }
+        &__title{
+            @include animat.fade-bottom(1.8s, -500px);
+            color: vars.$primary-color;
+        }
+
+        &__text{
+             @include animat.fade-in(1.8s, 500px);
+            color: vars.$font-color;
+            font-size: 1.25rem;
+            line-height: 1.5;
+          &--highlight{
+                @include animat.fade-in(1.8s, -500px);
+                color: vars.$secondary-color;
+                font-size: 1.15rem;
+                line-height: 1.5;
+                font-weight: bold;
+                }
+    }
+}
+}
