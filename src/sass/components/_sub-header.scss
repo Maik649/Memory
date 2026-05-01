@@ -1,0 +1,96 @@
+@use "../abstract/mixings" as resp;
+@use "../abstract/mixings" as animat;
+
+@use "./fonts" as fonts;
+
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 90%;
+  text-align: left;
+  font-weight: fonts.$font-weight-light;
+  color: fonts.$font-color-light;
+  font-family: "Almarai Regular", sans-serif;
+  padding: 8px 20px;
+  background-color: rgba(77, 213, 188, 0.8);
+  margin-top: 25px;
+}
+
+.player-content {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0 25px 0;
+  align-items: center;
+  background-color: rgba(77, 213, 188, 0.8);
+
+  & img {
+    width: 30px;
+    height: auto;
+  }
+  &p {
+    font-size: 24px;
+    color: fonts.$font-color;
+    font-family: "Almarai Bold", sans-serif;
+    font-weight: fonts.$font-weight-bold;
+  }
+
+  & .--label-blue {
+    color: rgb(77, 97, 213);
+  }
+  & .--label-orange {
+    color: rgb(255, 165, 0);
+  }
+}
+
+.current-player {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+
+  & img {
+    width: 30px;
+    height: auto;
+  }
+  .--label-blue {
+    color: rgb(77, 213, 188);
+  }
+  .--label-orange {
+    color: rgb(255, 165, 0);
+  }
+}
+
+.exit-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid rgba(77, 213, 188, 0.6);
+  padding: 8px 16px;
+
+  &:hover {
+    background-color: rgba(67, 193, 168, 0.8);
+    transition: all 0.3s ease;
+  }
+
+  & img {
+    width: 30px;
+    height: auto;
+  }
+
+  & a {
+    @include animat.fade-in();
+    font-size: 24px;
+    color: fonts.$font-color;
+    font-family: "Almarai Regular", sans-serif;
+    font-weight: fonts.$font-weight-regular;
+    text-decoration: none;
+    // background-color: rgb(77, 213, 188);
+    padding: 0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+}

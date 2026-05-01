@@ -1,18 +1,15 @@
-@use './components/card';
-@use './components/variable' as vars;
-@use './abstract/mixings' as resp;
-@use './abstract/mixings' as animat;
-@use './components/button' as button;
-@use './base/base' as base;
+@use "./components/card";
+@use "./components/variable" as vars;
+@use "./abstract/mixings" as resp;
+@use "./abstract/mixings" as animat;
+@use "./components/button" as button;
+@use "./base/base" as base;
+@use "./components/fonts" as fonts;
+@use "./pages/start-screen" as start-screen;
+@use "./pages/settings";
+@use "./components/sub-header" as sub-header;
 
-h1{
-    @include animat.fade-bottom(1.5s, -500px);
-    color: vars.$secondary-color;
-}
-
-body{
- @include resp.fex-center();
-    flex-direction: column;
-    height: 100vh;
-    background-color: #f5f5f5;
+body {
+  @include resp.fex-center();
+  flex-direction: column;
 }

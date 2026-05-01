@@ -1,4 +1,7 @@
-@use 'variable' as vars;
-@use '../abstract/mixings' as resp;
-@use '../abstract/mixings' as animat;
-/*Nesting Bsp. */ 
+/*Nesting Bsp. */
+
+img {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+}

@@ -1,35 +1,41 @@
-@use 'variable' as vars;
-@use '../abstract/mixings' as animat;
+@use "variable" as vars;
+@use "../abstract/mixings" as animat;
+@use "../components/fonts" as fonts;
 
 /* BEM  Block Element Modifier*/
 
 /*Block */
-.button{
-    @include animat.fade-top(1.8s, 500px);
-    background-color: vars.$primary-color;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 18px;
+.button {
+  @include animat.fade-top(1.8s, 500px);
+  // background-color: vars.$button-bg-color;
+  color: fonts.$font-color;
+  border: none;
+  padding: 25px 70px;
+  cursor: pointer;
+  font-size: 40px;
+  font-family: "red-rose-bold", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  display: grid;
+  place-items: center;
 }
 
 /*Element */
-.button__icon{
-    margin-left: 25px;
-    &:hover{
-        background-color: vars.$secondary-color ;
-        outline: vars.$primary-color solid 2px;
-    }
+.button__icon {
+  margin-left: 25px;
+  &:hover {
+    padding: 25px 80px;
+    scale: 1.1;
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 /*Modifier */
-.button--primary{
-    background-color:   vars.$secondary-color;
-    outline: vars.$primary-color solid 2px;
-    &:hover{
-        background-color: vars.$primary-color;
-        color: #fff;
-    }
-}
+// .button--primary{
+//     background-color:   vars.$secondary-color;
+//     outline: vars.$primary-color-bg solid 2px;
+//     &:hover{
+//         background-color: vars.$primary-color-bg;
+//         color: vars.$font-color;
+//     }
+// }

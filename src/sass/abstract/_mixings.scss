@@ -12,6 +12,12 @@ $breakpoint:(sm: 480px, md: 768px, lg: 1024px);
     align-items: center;
 }
 
+@mixin fex-left(){
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 @mixin fade-in($duration: 0.5s, $distance: 550px){
     --fade-distance: #{$distance}; /* distance for fade-in animation benötigt es die var decleration um die varieable richtig ins css zu schreiben  #{$distance} */
     opacity: 0;
