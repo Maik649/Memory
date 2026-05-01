@@ -2,4 +2,4 @@
 
 declare module "*.scss";
 
-import "./sass/style.scss";
+import "./sass/main.scss";
