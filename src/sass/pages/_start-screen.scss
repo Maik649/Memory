@@ -7,7 +7,7 @@
   @include resp.fex-center();
   flex-direction: column;
   gap: 2rem;
-  background-color: vars.$primary-color-bg;
+  background-color: var(--color-surface);
   > img {
     position: absolute;
     left: 0;
@@ -29,7 +29,7 @@
     width: 100%;
     text-align: left;
     font-weight: fonts.$font-weight-light;
-    color: fonts.$font-color-light;
+    color: var(--color-text-light);
     font-family: "Almarai Regular", sans-serif;
   }
 }
@@ -40,7 +40,7 @@
   gap: 2rem;
   align-items: center;
   transition: all 0.3s ease;
-  background-color: vars.$button-bg-color;
+  background-color: var(--color-interactive);
   cursor: pointer;
   margin: 60px 0 0 0;
 

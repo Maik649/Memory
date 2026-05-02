@@ -1,0 +1,15 @@
+:root {
+  --color-primary-bg: #303131;
+  --color-secondary: #599eed;
+  --color-button-bg: #f0ea6e;
+  --color-text: #333333;
+  --color-text-light: #a4a4a4;
+  --color-surface: var(--color-primary-bg);
+  --color-accent: var(--color-secondary);
+  --color-interactive: var(--color-button-bg);
+  --theme-section-gradient: linear-gradient(
+    223.71deg,
+    #303131 43.86%,
+    #6d6d6d 122.2%
+  );
+}

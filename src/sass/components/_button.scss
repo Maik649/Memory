@@ -7,8 +7,8 @@
 /*Block */
 .button {
   @include animat.fade-top(1.8s, 500px);
-  // background-color: vars.$button-bg-color;
-  color: fonts.$font-color;
+  background-color: var(--color-interactive);
+  color: var(--color-text);
   border: none;
   padding: 25px 70px;
   cursor: pointer;
@@ -31,11 +31,12 @@
 }
 
 /*Modifier */
-// .button--primary{
-//     background-color:   vars.$secondary-color;
-//     outline: vars.$primary-color-bg solid 2px;
-//     &:hover{
-//         background-color: vars.$primary-color-bg;
-//         color: vars.$font-color;
-//     }
-// }
+.button--primary {
+  background-color: var(--color-accent);
+  outline: var(--color-primary-bg) solid 2px;
+
+  &:hover {
+    background-color: var(--color-primary-bg);
+    color: var(--color-text-light);
+  }
+}

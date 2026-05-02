@@ -6,3 +6,5 @@ declare module "*.scss";
 import "./sass/main.scss";
 
 // Script import
+
+import "./scripts/settings";
