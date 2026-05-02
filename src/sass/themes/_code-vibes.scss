@@ -1,13 +1,13 @@
 [data-theme="Code vibes theme"] {
   --color-primary-bg: #303131;
-  --color-secondary: #599eed;
-  --color-button-bg: #f0ea6e;
+  --color-secondary: rgb(53, 82, 77);
+  --color-button-bg: rgb(73, 186, 165, 0.5);
   --color-text: #333333;
   --color-text-light: #ffffff;
-  --color-interactive: #f0ea6e;
+  --color-interactive: rgb(73, 186, 165);
   --theme-section-gradient: linear-gradient(
-    223.71deg,
-    #303131 43.86%,
-    #6d6d6d 122.2%
+    190deg,
+    rgb(48, 49, 49, 1) 40%,
+    rgb(109, 109, 109, 1) 100%
   );
 }

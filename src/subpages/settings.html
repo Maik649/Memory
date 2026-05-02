@@ -81,13 +81,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="conten-right">
 
+                
                 <div class="theme-section">
                     <header>
                         <div class="player-content">
                             <img src="../../public/img/label_blue.svg" alt="">
+                            <p class="--label-blue">Blue</p>
                             <p class="--label-blue">0</p>
                             <img src="../../public/img/label2.svg" alt="">
+                            <p class="--label-orange">Orange</p>
                             <p class="--label-orange">0</p>
                         </div>
                         <div class="current-player">
@@ -96,7 +100,7 @@
                         <div class="button-content">
                             <div class="exit-btn">
                                 <img src="../../public/img/move_item.svg" alt="">
-                                <a href="#" class="button">Exit</a>
+                                <a href="#" class="button">Exit game</a>
                             </div>
                         </div>
                     </header>
@@ -105,8 +109,29 @@
                         <img class="preview-card preview-card--1" src="" alt="">
                     </div>
                 </div>
-            </section>
-        </main>
+                    <nav class="settings-nav">
+                        <ul class="settings-nav__list">
+                            <li class="settings-nav__item" data-settings-nav="theme">
+                             <span class="settings-nav__value">Code vibes theme</span>
+                            </li>
+                            <li class="settings-nav__divider"></li>
+                            <li class="settings-nav__item" data-settings-nav="player">
+                               <span class="settings-nav__value">Blue</span>
+                            </li>
+                            <li class="settings-nav__divider"></li>
+                            <li class="settings-nav__item" data-settings-nav="board-size">
+                             <span class="settings-nav__value">16</span>
+                            </li>
+                        </ul>
+                        <div class="setting-screen-buttons">
+                            <a href="./game.html" class="button--settings">Play</a>
+                            <img class="button-icons --controller" src="../../public/img/smart_display.png" alt="">
+                        </div>
+                    </nav>
+                    </div>
+                </section>
+            </main>
+
         <script type="module" src="/src/main.ts"></script>
     </body>
 

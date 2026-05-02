@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="Code vibes theme">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Memory Game</title>
+    </head>
+
+    <body class="game-page">
+        <main class="game-layout">
+            <section class="game-shell">
+                <header class="game-header">
+                    <div class="game-scoreboard">
+                        <div class="game-score game-score--blue">
+                            <img src="/img/label_blue.svg" alt="Blue marker">
+                            <span>Blue:</span>
+                            <strong data-score="Blue">0</strong>
+                        </div>
+                        <div class="game-score game-score--orange">
+                            <img src="/img/label2.svg" alt="Orange marker">
+                            <span>Orange:</span>
+                            <strong data-score="Orange">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="game-current-player">
+                        <span>Current player:</span>
+                        <img data-current-player-icon src="/img/label_blue.svg" alt="Blue player icon">
+                        <strong data-current-player-name>Blue</strong>
+                    </div>
+
+                    <div class="button-content">
+                        <div class="exit-btn">
+                            <img src="/img/move_item.svg" alt="Exit icon">
+                            <a href="./settings.html" class="button">Exit game</a>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="game-status" data-game-status>
+                    Finde alle Paare.
+                </section>
+
+                <section class="memory-content">
+                    <section class="game-grid" data-game-grid aria-label="Memory board">
+
+                    </section>
+                </section>
+
+            </section>
+        </main>
+
+        <div class="gameover-intro" data-gameover-intro hidden>
+            <h1 class="gameover-intro__title">Game over</h1>
+            <p class="gameover-intro__subtitle">Final score</p>
+            <div class="gameover-intro__scores">
+                <div class="gameover-intro__score gameover-intro__score--blue">
+                    <img src="/img/label_blue.svg" alt="Blue">
+                    <span>Blue</span>
+                    <strong data-gameover-score="Blue">0</strong>
+                </div>
+                <div class="gameover-intro__score gameover-intro__score--orange">
+                    <img src="/img/label2.svg" alt="Orange">
+                    <span>Orange</span>
+                    <strong data-gameover-score="Orange">0</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="winner-overlay" data-game-over hidden>
+            <div class="confetti-container" data-confetti></div>
+            <img class="winner-confetti-bg" src="/img/Confetti.png" alt="" aria-hidden="true">
+            <div class="winner-card">
+                <p class="winner-subtitle">The winner is</p>
+                <img class="winner-icon" data-winner-icon src="/img/label_blue.svg" alt="Winner icon">
+                <h1 class="winner-name" data-winner-name>BLUE PLAYER</h1>
+                <img class="winner-pawn" data-winner-pawn src="/img/player_blue.png" alt="Winner pawn">
+            </div>
+        </div>
+
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>

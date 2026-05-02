@@ -7,7 +7,7 @@
   @include resp.fex-center();
   flex-direction: column;
   gap: 2rem;
-  background-color: var(--color-surface);
+  background-color: vars.$primary-color-bg;
   > img {
     position: absolute;
     left: 0;
@@ -40,7 +40,7 @@
   gap: 2rem;
   align-items: center;
   transition: all 0.3s ease;
-  background-color: var(--color-interactive);
+  background-color: rgb(240, 234, 110);
   cursor: pointer;
   margin: 60px 0 0 0;
 

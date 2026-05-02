@@ -8,3 +8,4 @@ import "./sass/main.scss";
 // Script import
 
 import "./scripts/settings";
+import "./scripts/game";

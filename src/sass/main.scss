@@ -2,18 +2,17 @@
 @use "./components/variable" as vars;
 @use "./abstract/mixings" as resp;
 @use "./abstract/mixings" as animat;
-@use "./themes/tokens";
 @use "./themes/code-vibes";
 @use "./themes/gaming";
 @use "./themes/da-projects";
 @use "./themes/foods";
-@use "./themes/nature";
 @use "./themes/custom";
 @use "./components/button" as button;
 @use "./base/base" as base;
 @use "./components/fonts" as fonts;
 @use "./pages/start-screen" as start-screen;
 @use "./pages/settings";
+@use "./pages/game";
 @use "./components/sub-header" as sub-header;
 
 body {

@@ -7,7 +7,7 @@
 /*Block */
 .button {
   @include animat.fade-top(1.8s, 500px);
-  background-color: var(--color-interactive);
+
   color: var(--color-text);
   border: none;
   padding: 25px 70px;
