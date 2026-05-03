@@ -1,71 +1,74 @@
-$breakpoint:(sm: 480px, md: 768px, lg: 1024px);
+$breakpoint: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+);
 
-@mixin respond($sitze){
-    @media screen and (max-width: map-get($breakpoint, $sitze)){
-        @content;
-    }
+@mixin respond($sitze) {
+  @media screen and (max-width: map-get($breakpoint, $sitze)) {
+    @content;
+  }
 }
 
-@mixin fex-center(){
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@mixin fex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@mixin fex-left(){
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+@mixin fex-left() {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-@mixin fade-in($duration: 0.5s, $distance: 550px){
-    --fade-distance: #{$distance}; /* distance for fade-in animation benötigt es die var decleration um die varieable richtig ins css zu schreiben  #{$distance} */
+@mixin fade-in($duration: 0.5s, $distance: 550px) {
+  --fade-distance: #{$distance}; /* distance for fade-in animation benötigt es die var decleration um die varieable richtig ins css zu schreiben  #{$distance} */
+  opacity: 0;
+  animation: fade-in $duration ease-in-out forwards;
+}
+
+@mixin fade-top($duration: 0.5s, $distance: 550px) {
+  --fade-distance: #{$distance}; /* distance for fade-in animation benötigt es die var decleration um die varieable richtig ins css zu schreiben  #{$distance} */
+  opacity: 0;
+  animation: fade-top $duration ease-in-out forwards;
+}
+
+@mixin fade-bottom($duration: 0.5s, $distance: 550px) {
+  --fade-distance: #{$distance}; /* distance for fade-in animation benötigt es die var decleration um die varieable richtig ins css zu schreiben  #{$distance} */
+  opacity: 0;
+  animation: fade-bottom $duration ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    transform: translateX(var(--fade-distance));
     opacity: 0;
-    animation: fade-in $duration ease-in-out forwards;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-@mixin fade-top($duration: 0.5s, $distance: 550px){
-    --fade-distance: #{$distance}; /* distance for fade-in animation benötigt es die var decleration um die varieable richtig ins css zu schreiben  #{$distance} */
+@keyframes fade-top {
+  from {
+    transform: translateY(var(--fade-distance));
     opacity: 0;
-    animation: fade-top $duration ease-in-out forwards;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-@mixin fade-bottom($duration: 0.5s, $distance: 550px){
-    --fade-distance: #{$distance}; /* distance for fade-in animation benötigt es die var decleration um die varieable richtig ins css zu schreiben  #{$distance} */
+@keyframes fade-bottom {
+  from {
+    transform: translateY(var(--fade-distance));
     opacity: 0;
-    animation: fade-bottom $duration ease-in-out forwards;
-}
-
-@keyframes fade-in{
- from{
-        transform: translateX(var(--fade-distance));
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes fade-top{
- from{
-        transform: translateY(var(--fade-distance));
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-
-@keyframes fade-bottom{
- from{
-        transform: translateY(var(--fade-distance));
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

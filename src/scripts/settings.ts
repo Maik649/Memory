@@ -1,5 +1,7 @@
 export {};
 
+const BASE = import.meta.env.BASE_URL;
+
 /**
  * @interface ThemePreview
  * @property {string} card1 Pfad zum ersten Preview-Bild.
@@ -12,16 +14,16 @@ interface ThemePreview {
 
 const themePreviewMap: Record<string, ThemePreview> = {
   "Code vibes theme": {
-    card1: "/themes/code-vibes-card-1.svg",
-    card2: "/themes/code-vibes-card-2.png",
+    card1: `${BASE}themes/code-vibes-card-1.svg`,
+    card2: `${BASE}themes/code-vibes-card-2.png`,
   },
   "Gaming theme": {
-    card1: "/themes/gaming-card-1.png",
-    card2: "/themes/gaming-card-2.png",
+    card1: `${BASE}themes/gaming-card-1.png`,
+    card2: `${BASE}themes/gaming-card-2.png`,
   },
   "DA Projects theme": {
-    card1: "/themes/da-projects-card-1.png",
-    card2: "/themes/da-projects-card-2.png",
+    card1: `${BASE}themes/da-projects-card-1.png`,
+    card2: `${BASE}themes/da-projects-card-2.png`,
   },
 };
 
@@ -70,18 +72,18 @@ const defaultTheme = "Code vibes theme";
 const defaultPlayer = "Blue";
 const defaultBoardSize = "16";
 const defaultPlayerIcons: Record<string, string> = {
-  Blue: "/img/label_blue.svg",
-  Orange: "/img/label2.svg",
+  Blue: `${BASE}img/label_blue.svg`,
+  Orange: `${BASE}img/label2.svg`,
 };
 const playerIconsByTheme: Record<string, Record<string, string>> = {
   "Code vibes theme": defaultPlayerIcons,
   "Gaming theme": {
-    Blue: "/img/player_blue.png",
-    Orange: "/img/player-orange.png",
+    Blue: `${BASE}img/player_blue.png`,
+    Orange: `${BASE}img/player-orange.png`,
   },
   "DA Projects theme": {
-    Blue: "/img/player_blue.png",
-    Orange: "/img/player-orange.png",
+    Blue: `${BASE}img/player_blue.png`,
+    Orange: `${BASE}img/player-orange.png`,
   },
 };
 

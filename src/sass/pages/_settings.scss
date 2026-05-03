@@ -6,6 +6,20 @@
 
 .setting-h1 {
   color: var(--color-text);
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    background-image: url("/img/line-3.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left top;
+    width: 120%;
+    left: 50px;
+    height: 58px;
+    margin-top: -20px;
+  }
 }
 
 .settings-content {
@@ -42,7 +56,7 @@
   gap: 25px;
   width: 25%;
   height: 59vh;
-  padding: 20px;
+  padding: 70px 0;
 }
 
 .input-content {
@@ -194,6 +208,7 @@ label {
   justify-content: space-between;
   width: 80%;
   padding: 12px 20px;
+  height: 80px;
   margin-top: auto;
   background-color: rgb(246, 246, 246);
 
@@ -258,7 +273,7 @@ label {
   padding: 0px 0px;
 
   &:hover {
-    padding: 0 7px;
+    padding: 3px 7px;
     transition: all 0.3s ease;
   }
   & .button-icons {
@@ -273,7 +288,7 @@ label {
     margin: -16px 7.5rem -16px 20px;
   }
   &:hover .button-icons.button-icons.--controller {
-    transform: rotate(-25deg);
+    transform: rotate(-10deg);
     transition: all 0.35s ease-in-out;
   }
 }
@@ -284,6 +299,7 @@ label {
   text-decoration: none;
   font-family: "Red Rose Bold", sans-serif;
   font-weight: fonts.$font-weight-bold;
+  color: var(--color-text);
 }
 
 .theme-preview {

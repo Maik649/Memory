@@ -13,6 +13,7 @@
     "strict": true, // alle strikten Checks aktivieren
     "skipLibCheck": true, // schneller, da node_modules-Typen nicht geprüft werden
     "noEmit": true, // keine JS-Ausgabe, Build übernimmt Vite
+    "types": ["node"], // __dirname und Node-Typen für vite.config.ts
 
     /* Sonstiges */
     "esModuleInterop": true, // bessere Import-Kompatibilität

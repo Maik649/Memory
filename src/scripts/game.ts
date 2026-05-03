@@ -1,5 +1,7 @@
 export {};
 
+const BASE = import.meta.env.BASE_URL;
+
 /**
  * @typedef {"Blue" | "Orange"} Player
  */
@@ -46,39 +48,39 @@ const GAME_OVER_INTRO_MS = 2000;
 const GAME_OVER_DISPLAY_MS = 4000;
 
 const defaultPlayerIconMap: Record<Player, string> = {
-    Blue: "/img/label_blue.svg",
-    Orange: "/img/label2.svg",
+    Blue: `${BASE}img/label_blue.svg`,
+    Orange: `${BASE}img/label2.svg`,
 };
 const playerIconMapByTheme: Record<string, Record<Player, string>> = {
   "Code vibes theme": defaultPlayerIconMap,
   "Gaming theme": {
-    Blue: "/img/player_blue.png",
-        Orange: "/img/player-orange.png",
+    Blue: `${BASE}img/player_blue.png`,
+        Orange: `${BASE}img/player-orange.png`,
   },
   "DA Projects theme": {
-    Blue: "/img/player_blue.png",
-        Orange: "/img/player-orange.png",
+    Blue: `${BASE}img/player_blue.png`,
+        Orange: `${BASE}img/player-orange.png`,
   },
 };
 
 const winnerPawnMap: Record<Player, string> = {
-    Blue: "/img/player_blue.png",
-    Orange: "/img/player-orange.png",
+    Blue: `${BASE}img/player_blue.png`,
+    Orange: `${BASE}img/player-orange.png`,
 };
 
 const winnerImageMapByTheme: Record<string, Record<Player, string>> = {
     "Code vibes theme": winnerPawnMap,
     "Gaming theme": {
-        Blue: "/img/pokal.png",
-        Orange: "/img/pokal.png",
+        Blue: `${BASE}img/pokal.png`,
+        Orange: `${BASE}img/pokal.png`,
     },
     "DA Projects theme": winnerPawnMap,
 };
 
 const cardBackByTheme: Record<string, string> = {
-    "Code vibes theme": "/themes/code-vibes-card-1.svg",
-    "Gaming theme": "/themes/gaming-card-1.png",
-    "DA Projects theme": "/themes/da-projects-card-1.png",
+    "Code vibes theme": `${BASE}themes/code-vibes-card-1.svg`,
+    "Gaming theme": `${BASE}themes/gaming-card-1.png`,
+    "DA Projects theme": `${BASE}themes/da-projects-card-1.png`,
 };
 
 const defaultTheme = "Code vibes theme";
@@ -86,59 +88,59 @@ const defaultPlayer: Player = "Blue";
 const defaultBoardSize = 16;
 const cardFrontByTheme: Record<string, string[]> = {
     "Code vibes theme": [
-        "/img/theme-img/code-vibes-front-1.png",
-        "/img/theme-img/code-vibes-front-2.png",
-        "/img/theme-img/code-vibes-front-3.png",
-        "/img/theme-img/code-vibes-front-4.png",
-        "/img/theme-img/code-vibes-front-5.png",
-        "/img/theme-img/code-vibes-front-6.png",
-        "/img/theme-img/code-vibes-front-7.png",
-        "/img/theme-img/code-vibes-front-8.png",
-        "/img/theme-img/code-vibes-front-9.png",
-        "/img/theme-img/code-vibes-front-10.png",
-        "/img/theme-img/code-vibes-front-11.png",
-        "/img/theme-img/code-vibes-front-12.png",
-        "/img/theme-img/code-vibes-front-13.png",
-        "/img/theme-img/code-vibes-front-14.png",
-        "/img/theme-img/code-vibes-front-15.png",
+        `${BASE}img/theme-img/code-vibes-front-1.png`,
+        `${BASE}img/theme-img/code-vibes-front-2.png`,
+        `${BASE}img/theme-img/code-vibes-front-3.png`,
+        `${BASE}img/theme-img/code-vibes-front-4.png`,
+        `${BASE}img/theme-img/code-vibes-front-5.png`,
+        `${BASE}img/theme-img/code-vibes-front-6.png`,
+        `${BASE}img/theme-img/code-vibes-front-7.png`,
+        `${BASE}img/theme-img/code-vibes-front-8.png`,
+        `${BASE}img/theme-img/code-vibes-front-9.png`,
+        `${BASE}img/theme-img/code-vibes-front-10.png`,
+        `${BASE}img/theme-img/code-vibes-front-11.png`,
+        `${BASE}img/theme-img/code-vibes-front-12.png`,
+        `${BASE}img/theme-img/code-vibes-front-13.png`,
+        `${BASE}img/theme-img/code-vibes-front-14.png`,
+        `${BASE}img/theme-img/code-vibes-front-15.png`,
     ],
     "Gaming theme": [
-        "/img/theme-img/gaming-front-1.png",
-        "/img/theme-img/gaming-front-2.png",
-        "/img/theme-img/gaming-front-3.png",
-        "/img/theme-img/gaming-front-4.png",
-        "/img/theme-img/gaming-front-5.png",
-        "/img/theme-img/gaming-front-6.png",
-        "/img/theme-img/gaming-front-7.png",
-        "/img/theme-img/gaming-front-8.png",
-        "/img/theme-img/gaming-front-9.png",
-        "/img/theme-img/gaming-front-10.png",
-        "/img/theme-img/gaming-front-11.png",
-        "/img/theme-img/gaming-front-12.png",
-        "/img/theme-img/gaming-front-13.png",
-        "/img/theme-img/gaming-front-14.png",
-        "/img/theme-img/gaming-front-15.png",
-        "/img/theme-img/gaming-front-16.png",
-        "/img/theme-img/gaming-front-17.png",
+        `${BASE}img/theme-img/gaming-front-1.png`,
+        `${BASE}img/theme-img/gaming-front-2.png`,
+        `${BASE}img/theme-img/gaming-front-3.png`,
+        `${BASE}img/theme-img/gaming-front-4.png`,
+        `${BASE}img/theme-img/gaming-front-5.png`,
+        `${BASE}img/theme-img/gaming-front-6.png`,
+        `${BASE}img/theme-img/gaming-front-7.png`,
+        `${BASE}img/theme-img/gaming-front-8.png`,
+        `${BASE}img/theme-img/gaming-front-9.png`,
+        `${BASE}img/theme-img/gaming-front-10.png`,
+        `${BASE}img/theme-img/gaming-front-11.png`,
+        `${BASE}img/theme-img/gaming-front-12.png`,
+        `${BASE}img/theme-img/gaming-front-13.png`,
+        `${BASE}img/theme-img/gaming-front-14.png`,
+        `${BASE}img/theme-img/gaming-front-15.png`,
+        `${BASE}img/theme-img/gaming-front-16.png`,
+        `${BASE}img/theme-img/gaming-front-17.png`,
     ],
     "DA Projects theme": [
-        "/img/theme-img/da-projects-front-1.png",
-        "/img/theme-img/da-projects-front-2.png",
-        "/img/theme-img/da-projects-front-3.png",
-        "/img/theme-img/da-projects-front-4.png",
-        "/img/theme-img/da-projects-front-5.png",
-        "/img/theme-img/da-projects-front-6.png",
-        "/img/theme-img/da-projects-front-7.png",
-        "/img/theme-img/da-projects-front-8.png",
-        "/img/theme-img/da-projects-front-9.png",
-        "/img/theme-img/da-projects-front-10.png",
-        "/img/theme-img/da-projects-front-11.png",
-        "/img/theme-img/da-projects-front-12.png",
-        "/img/theme-img/da-projects-front-13.png",
-        "/img/theme-img/da-projects-front-14.png",
-        "/img/theme-img/da-projects-front-15.png",
-        "/img/theme-img/da-projects-front-16.png",
-        "/img/theme-img/da-projects-front-17.png",
+        `${BASE}img/theme-img/da-projects-front-1.png`,
+        `${BASE}img/theme-img/da-projects-front-2.png`,
+        `${BASE}img/theme-img/da-projects-front-3.png`,
+        `${BASE}img/theme-img/da-projects-front-4.png`,
+        `${BASE}img/theme-img/da-projects-front-5.png`,
+        `${BASE}img/theme-img/da-projects-front-6.png`,
+        `${BASE}img/theme-img/da-projects-front-7.png`,
+        `${BASE}img/theme-img/da-projects-front-8.png`,
+        `${BASE}img/theme-img/da-projects-front-9.png`,
+        `${BASE}img/theme-img/da-projects-front-10.png`,
+        `${BASE}img/theme-img/da-projects-front-11.png`,
+        `${BASE}img/theme-img/da-projects-front-12.png`,
+        `${BASE}img/theme-img/da-projects-front-13.png`,
+        `${BASE}img/theme-img/da-projects-front-14.png`,
+        `${BASE}img/theme-img/da-projects-front-15.png`,
+        `${BASE}img/theme-img/da-projects-front-16.png`,
+        `${BASE}img/theme-img/da-projects-front-17.png`,
     ],
 };
 
@@ -592,7 +594,7 @@ function applyWinnerPawn(winner: string) {
     if (winner !== "draw") {
         const player = winner as Player;
         const winnerImage = getWinnerImage(player);
-        winnerPawnElement.dataset.player = winnerImage.includes("/img/pokal") ? "trophy" : winner;
+        winnerPawnElement.dataset.player = winnerImage.includes(`${BASE}img/pokal`) ? "trophy" : winner;
         winnerPawnElement.src = winnerImage;
         winnerPawnElement.onerror = () => {
             winnerPawnElement!.dataset.player = player;
