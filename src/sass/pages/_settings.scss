@@ -36,10 +36,12 @@
 
 .sidebar {
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
+  flex: 1;
   gap: 25px;
   width: 25%;
-  height: 100%;
+  height: 59vh;
   padding: 20px;
 }
 
@@ -48,13 +50,18 @@
   flex-direction: column;
   gap: 1.5rem;
   margin-left: 3rem;
+  border: 0;
+  min-inline-size: 0;
+  margin-top: 35px;
+  margin-bottom: 0;
+  padding: 0;
 
   & .input-container {
     @include resp.fex-left();
     flex-direction: row;
     gap: 1rem;
     width: 100%;
-    font-size: 24px;
+    font-size: 20px;
     color: var(--color-text);
     font-family: "Almarai Regular", sans-serif;
     font-weight: fonts.$font-weight-regular;
@@ -67,7 +74,7 @@ input {
   color: var(--color-text);
   width: 1em;
   height: 1em;
-  border: 3px solid rgba(0, 0, 0, 0.713);
+  border: 2px solid rgba(0, 0, 0, 0.713);
   border-radius: 50%;
   appearance: none;
   position: relative;
@@ -76,6 +83,11 @@ input {
   &:focus-visible,
   &:focus,
   &:active {
+    border: 3px solid rgba(0, 0, 0, 0.713);
+    background-color: rgba(255, 255, 255, 0.952);
+  }
+
+  &:hover {
     border: 3px solid rgba(0, 0, 0, 0.713);
     background-color: rgba(255, 255, 255, 0.952);
   }
@@ -112,14 +124,23 @@ label {
   transition: opacity 120ms ease-in-out;
 }
 
-.input-container:has(input:checked) .label-icon {
+.input-container:has(input:checked) .label-icon,
+.input-container:hover .label-icon {
   opacity: 1;
 }
+
+.input-container:hover input[type="radio"]::before {
+  border-color: rgba(80, 80, 80, 0.713);
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
 .conten-right {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  flex: 2;
   gap: 1rem;
-  width: 75%;
+  width: 100%;
   height: 100%;
 }
 
@@ -131,7 +152,6 @@ label {
   width: 70%;
   height: 560px;
   border-radius: 16px;
-  margin-left: 25%;
   background-image: var(--theme-section-gradient);
   transition: background-image 300ms ease-in-out;
 
@@ -148,6 +168,24 @@ label {
       color: var(--color-text-light) !important;
     }
   }
+
+  .current-player-content-img {
+    padding: 8px;
+    border-radius: 8px;
+
+    &[data-player="Blue"] {
+      background-color: #2bb1ff;
+    }
+
+    &[data-player="Orange"] {
+      background-color: #f58e39;
+    }
+
+    & img {
+      width: 20px;
+      filter: contrast(100%) brightness(0) invert(1);
+    }
+  }
 }
 
 .settings-nav {
@@ -157,7 +195,6 @@ label {
   width: 80%;
   padding: 12px 20px;
   margin-top: auto;
-  margin-left: 15%;
   background-color: rgb(246, 246, 246);
 
   &__list {

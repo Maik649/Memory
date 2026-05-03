@@ -2,10 +2,8 @@
 
 declare module "*.scss";
 
-// Stylesheet import
 import "./sass/main.scss";
 
-// Script import
-
 import "./scripts/settings";
+
 import "./scripts/game";

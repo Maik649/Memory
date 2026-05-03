@@ -11,31 +11,31 @@
         <main class="game-layout">
             <section class="game-shell">
                 <header class="game-header">
-                    <div class="game-scoreboard">
-                        <div class="game-score game-score--blue">
-                            <img src="/img/label_blue.svg" alt="Blue marker">
-                            <span>Blue:</span>
+                    <section class="game-scoreboard" aria-label="Scoreboard">
+                        <article class="game-score game-score--blue" aria-label="Blue score">
+                            <img data-score-icon="Blue" src="/img/label_blue.svg" alt="Blue marker">
+                            <span class="score-label">Blue:</span>
                             <strong data-score="Blue">0</strong>
-                        </div>
-                        <div class="game-score game-score--orange">
-                            <img src="/img/label2.svg" alt="Orange marker">
-                            <span>Orange:</span>
+                        </article>
+                        <article class="game-score game-score--orange" aria-label="Orange score">
+                            <img data-score-icon="Orange" src="/img/label2.svg" alt="Orange marker">
+                            <span class="score-label">Orange:</span>
                             <strong data-score="Orange">0</strong>
-                        </div>
-                    </div>
+                        </article>
+                    </section>
 
-                    <div class="game-current-player">
+                    <section class="game-current-player" aria-label="Current player">
                         <span>Current player:</span>
                         <img data-current-player-icon src="/img/label_blue.svg" alt="Blue player icon">
                         <strong data-current-player-name>Blue</strong>
-                    </div>
+                    </section>
 
-                    <div class="button-content">
+                    <nav class="button-content" aria-label="Game actions">
                         <div class="exit-btn">
-                            <img src="/img/move_item.svg" alt="Exit icon">
+                            <span class="exit-btn__icon" aria-hidden="true"></span>
                             <a href="./settings.html" class="button">Exit game</a>
                         </div>
-                    </div>
+                    </nav>
                 </header>
 
                 <section class="game-status" data-game-status>
@@ -51,33 +51,34 @@
             </section>
         </main>
 
-        <div class="gameover-intro" data-gameover-intro hidden>
+        <section class="gameover-intro" data-gameover-intro hidden aria-live="polite">
             <h1 class="gameover-intro__title">Game over</h1>
             <p class="gameover-intro__subtitle">Final score</p>
-            <div class="gameover-intro__scores">
-                <div class="gameover-intro__score gameover-intro__score--blue">
-                    <img src="/img/label_blue.svg" alt="Blue">
+            <section class="gameover-intro__scores" aria-label="Final score overview">
+                <article class="gameover-intro__score gameover-intro__score--blue" aria-label="Blue final score">
+                    <img data-gameover-score-icon="Blue" src="/img/label_blue.svg" alt="Blue">
                     <span>Blue</span>
                     <strong data-gameover-score="Blue">0</strong>
-                </div>
-                <div class="gameover-intro__score gameover-intro__score--orange">
-                    <img src="/img/label2.svg" alt="Orange">
+                </article>
+                <article class="gameover-intro__score gameover-intro__score--orange" aria-label="Orange final score">
+                    <img data-gameover-score-icon="Orange" src="/img/label2.svg" alt="Orange">
                     <span>Orange</span>
                     <strong data-gameover-score="Orange">0</strong>
-                </div>
-            </div>
-        </div>
+                </article>
+            </section>
+        </section>
 
-        <div class="winner-overlay" data-game-over hidden>
+        <aside class="winner-overlay" data-game-over hidden aria-live="polite" aria-label="Winner overlay">
             <div class="confetti-container" data-confetti></div>
-            <img class="winner-confetti-bg" src="/img/Confetti.png" alt="" aria-hidden="true">
-            <div class="winner-card">
-                <p class="winner-subtitle">The winner is</p>
+            <img class="winner-confetti-bg" src="/img/confetti.png" alt="" aria-hidden="true">
+            <article class="winner-card">
+                <p class="winner-subtitle" data-winner-subtitle>The winner is</p>
                 <img class="winner-icon" data-winner-icon src="/img/label_blue.svg" alt="Winner icon">
                 <h1 class="winner-name" data-winner-name>BLUE PLAYER</h1>
                 <img class="winner-pawn" data-winner-pawn src="/img/player_blue.png" alt="Winner pawn">
-            </div>
-        </div>
+                <img class="winner-draw-icon" data-winner-draw-icon src="/img/chess-pawn.svg" alt="" aria-hidden="true" hidden>
+            </article>
+        </aside>
 
         <script type="module" src="/src/main.ts"></script>
     </body>

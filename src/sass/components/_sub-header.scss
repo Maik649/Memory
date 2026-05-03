@@ -7,7 +7,7 @@ header {
   justify-content: space-around;
   align-items: center;
   gap: 1rem;
-  width: 95%;
+  width: auto;
   text-align: left;
   font-weight: fonts.$font-weight-light;
   color: fonts.$font-color-light;
@@ -25,20 +25,23 @@ header {
   padding: 0.45rem 0.9rem;
   align-items: center;
   border-radius: 4px;
-  background: color-mix(in srgb, var(--color-secondary) 68%, #6cb0a9 32%);
-  border: 1px solid color-mix(in srgb, var(--color-secondary) 78%, #9ee4d7 22%);
+  background: color-mix(in srgb, var(--color-player-bg) 68%, #6cb0a9 32%);
 
   & img {
-    width: 12px;
+    width: 20px;
     height: auto;
   }
   & p {
     margin: 0;
-    font-size: 16px;
+    font-size: 20px;
     color: fonts.$font-color;
     font-family: "Almarai Bold", sans-serif;
     font-weight: fonts.$font-weight-bold;
     line-height: 1;
+  }
+
+  & .--player-name {
+    display: var(--player-name-display, none);
   }
 
   & .--label-blue {
@@ -78,19 +81,24 @@ header {
   gap: 0.5rem;
   align-items: center;
   cursor: pointer;
-  border: 2px solid var(--color-button-bg);
+  border: 2px solid var(--color-button-border);
+  border-radius: var(--exit-btn-radius, 0px);
   padding: 4px 8px;
   background-color: var(--color-button-bg);
 
   &:hover {
-    border: 4px solid var(--color-button-bg);
+    border: 4px solid var(--color-button-border);
     scale: 1;
     transition: all 256ms ease-in-out;
   }
 
-  & img {
+  & .exit-btn__icon {
     width: 20px;
-    height: auto;
+    height: 20px;
+    display: inline-block;
+    background-color: var(--color-button-border);
+    -webkit-mask: url("/img/move-item.svg") center / contain no-repeat;
+    mask: url("/img/move-item.svg") center / contain no-repeat;
   }
 
   & a {
