@@ -46,6 +46,18 @@ const winnerSubtitleElement = document.querySelector("[data-winner-subtitle]") a
 const confettiContainer = document.querySelector("[data-confetti]") as HTMLElement | null;
 const GAME_OVER_INTRO_MS = 2000;
 const GAME_OVER_DISPLAY_MS = 4000;
+const GAME_IN_PROGRESS_STORAGE_KEY = "memoryGameInProgress";
+const GAME_STATE_STORAGE_KEY = "memoryGameState";
+
+interface GameStateSnapshot {
+    theme: string;
+    boardSize: number;
+    currentPlayer: Player;
+    cards: CardModel[];
+    scores: Record<Player, number>;
+    matchedPairs: number;
+    statusText: string;
+}
 
 const defaultPlayerIconMap: Record<Player, string> = {
     Blue: `${BASE}img/label_blue.svg`,
@@ -153,6 +165,115 @@ let firstCardId: number | null = null;
 let secondCardId: number | null = null;
 let matchedPairs = 0;
 const scores: Record<Player, number> = { Blue: 0, Orange: 0 };
+
+/**
+ * Prueft, ob ein String einem gueltigen Spieler entspricht.
+ * @param {unknown} value Zu pruefender Wert.
+ * @returns {value is Player} True bei gueltigem Spielerwert.
+ */
+function isPlayer(value: unknown): value is Player {
+    return value === "Blue" || value === "Orange";
+}
+
+/**
+ * Entfernt gespeicherten Spielstatus und Session-Flag.
+ * @returns {void}
+ */
+function clearStoredGameState() {
+    sessionStorage.removeItem(GAME_IN_PROGRESS_STORAGE_KEY);
+    sessionStorage.removeItem(GAME_STATE_STORAGE_KEY);
+}
+
+/**
+ * Baut einen serialisierbaren Snapshot aus dem aktuellen Spielzustand.
+ * @param {number} boardSize Aktuelle Board-Groesse.
+ * @returns {GameStateSnapshot} Snapshot des Spiels.
+ */
+function buildGameSnapshot(boardSize: number): GameStateSnapshot {
+    return {
+        theme: activeTheme,
+        boardSize,
+        currentPlayer,
+        cards,
+        scores: { ...scores },
+        matchedPairs,
+        statusText: statusElement?.textContent ?? "",
+    };
+}
+
+/**
+ * Speichert den aktuellen Spielzustand in der Session.
+ * @returns {void}
+ */
+function persistGameState() {
+    if (!cards.length) {
+        return;
+    }
+
+    const boardSize = cards.length;
+    const snapshot = buildGameSnapshot(boardSize);
+    sessionStorage.setItem(GAME_STATE_STORAGE_KEY, JSON.stringify(snapshot));
+    sessionStorage.setItem(GAME_IN_PROGRESS_STORAGE_KEY, "true");
+}
+
+/**
+ * Liest und validiert einen gespeicherten Snapshot aus der Session.
+ * @returns {GameStateSnapshot | null} Gueltiger Snapshot oder null.
+ */
+function readStoredGameState(): GameStateSnapshot | null {
+    const raw = sessionStorage.getItem(GAME_STATE_STORAGE_KEY);
+    if (!raw) {
+        return null;
+    }
+
+    try {
+        const parsed = JSON.parse(raw) as Partial<GameStateSnapshot>;
+        const isValidBoardSize = parsed.boardSize === 16 || parsed.boardSize === 24 || parsed.boardSize === 34;
+        if (
+            !parsed ||
+            typeof parsed.theme !== "string" ||
+            !isValidBoardSize ||
+            !isPlayer(parsed.currentPlayer) ||
+            !Array.isArray(parsed.cards) ||
+            typeof parsed.matchedPairs !== "number" ||
+            typeof parsed.statusText !== "string" ||
+            !parsed.scores ||
+            typeof parsed.scores.Blue !== "number" ||
+            typeof parsed.scores.Orange !== "number"
+        ) {
+            return null;
+        }
+
+        const hasValidCards = parsed.cards.every((card) => {
+            const isValidState = card.state === "hidden" || card.state === "revealed" || card.state === "matched";
+            return (
+                typeof card.id === "number" &&
+                typeof card.pairId === "number" &&
+                typeof card.value === "string" &&
+                isValidState
+            );
+        });
+
+        if (!hasValidCards || parsed.cards.length !== parsed.boardSize) {
+            return null;
+        }
+
+        return {
+            theme: parsed.theme,
+            boardSize: parsed.boardSize,
+            currentPlayer: parsed.currentPlayer,
+            cards: parsed.cards,
+            scores: {
+                Blue: parsed.scores.Blue,
+                Orange: parsed.scores.Orange,
+            },
+            matchedPairs: parsed.matchedPairs,
+            statusText: parsed.statusText,
+        };
+    } catch {
+        return null;
+    }
+}
 
 /**
  * Liest und validiert die Board-Groesse aus dem Storage-Wert.
@@ -457,7 +578,11 @@ function handleMatchedPair(firstCard: CardModel, secondCard: CardModel) {
     lockBoard = false;
     firstCardId = null;
     secondCardId = null;
-    if (matchedPairs === cards.length / 2) { showGameOver(); }
+    if (matchedPairs === cards.length / 2) {
+        showGameOver();
+        return;
+    }
+    persistGameState();
 }
 
 /**
@@ -477,6 +602,7 @@ function handleMismatch(firstCard: CardModel, secondCard: CardModel) {
         secondCardId = null;
         lockBoard = false;
         switchPlayer();
+        persistGameState();
     }, 700);
 }
 
@@ -524,10 +650,12 @@ function onCardClick(event: Event) {
     if (firstCardId === null) {
         firstCardId = card.id;
         updateStatus(`${currentPlayer} ist am Zug.`);
+        persistGameState();
         return;
     }
     secondCardId = card.id;
     lockBoard = true;
+    persistGameState();
     evaluateTurn();
 }
 
@@ -582,6 +710,9 @@ function applyGameoverScores() {
     if (gameoverBlueScore) { gameoverBlueScore.textContent = String(scores.Blue); }
     if (gameoverOrangeScore) { gameoverOrangeScore.textContent = String(scores.Orange); }
 }
+
+
+
 
 /**
  * Setzt den Gewinner-Pawn im Overlay.
@@ -640,7 +771,11 @@ function showGameOverOverlay() {
         if (gameoverIntroOverlay) { gameoverIntroOverlay.setAttribute("hidden", ""); }
         spawnConfetti();
         gameOverOverlay!.removeAttribute("hidden");
-        window.setTimeout(() => { window.location.href = "./settings.html"; }, GAME_OVER_DISPLAY_MS);
+        window.setTimeout(() => {
+            window.removeEventListener("beforeunload", persistGameState);
+            clearStoredGameState();
+            window.location.href = "./settings.html";
+        }, GAME_OVER_DISPLAY_MS);
     }, GAME_OVER_INTRO_MS);
 }
 
@@ -650,10 +785,73 @@ function showGameOverOverlay() {
  */
 function showGameOver() {
     if (!gameOverOverlay) { return; }
+    clearStoredGameState();
     const { winner, winnerLabel } = determineWinner();
     applyGameoverScores();
     applyWinnerElements(winner, winnerLabel);
-    showGameOverOverlay();
+    setTimeout(() => {
+        showGameOverOverlay();
+    }, 1500);
+}
+
+/**
+ * Setzt temporaere Zugzustande zurueck.
+ * @returns {void}
+ */
+function resetTurnState() {
+    firstCardId = null;
+    secondCardId = null;
+    lockBoard = false;
+}
+
+/**
+ * Prueft, ob ein gespeicherter Zustand fuer das aktuelle Setup nutzbar ist.
+ * @param {GameStateSnapshot | null} storedGameState Gespeicherter Zustand.
+ * @param {number} boardSize Aktuelle Board-Groesse.
+ * @returns {storedGameState is GameStateSnapshot} True bei passendem Zustand.
+ */
+function canRestoreGameState(
+    storedGameState: GameStateSnapshot | null,
+    boardSize: number,
+): storedGameState is GameStateSnapshot {
+    return storedGameState !== null
+        && storedGameState.theme === activeTheme
+        && storedGameState.boardSize === boardSize;
+}
+
+/**
+ * Stellt einen gespeicherten Spielzustand wieder her.
+ * @param {GameStateSnapshot} storedGameState Gespeicherter Zustand.
+ * @param {number} boardSize Aktuelle Board-Groesse.
+ * @returns {void}
+ */
+function restoreGameState(storedGameState: GameStateSnapshot, boardSize: number) {
+    currentPlayer = storedGameState.currentPlayer;
+    cards = storedGameState.cards;
+    scores.Blue = storedGameState.scores.Blue;
+    scores.Orange = storedGameState.scores.Orange;
+    matchedPairs = storedGameState.matchedPairs;
+    resetTurnState();
+    renderBoard(boardSize);
+    updateHeaderState();
+    updateStatus(storedGameState.statusText || `${currentPlayer} ist am Zug.`);
+}
+
+/**
+ * Startet ein neues Spiel mit aktueller Konfiguration.
+ * @param {number} boardSize Aktuelle Board-Groesse.
+ * @returns {void}
+ */
+function startNewGame(boardSize: number) {
+    currentPlayer = getInitialPlayer();
+    cards = createCards(boardSize);
+    matchedPairs = 0;
+    scores.Blue = 0;
+    scores.Orange = 0;
+    resetTurnState();
+    renderBoard(boardSize);
+    updateHeaderState();
+    updateStatus(`${currentPlayer} beginnt.`);
 }
 
 /**
@@ -661,18 +859,20 @@ function showGameOver() {
  * @returns {void}
  */
 function initGame() {
-    if (!gameRoot || !boardElement) {
-        return;
-    }
-
+    if (!gameRoot || !boardElement) { return; }
     applyStoredTheme();
     applyThemePlayerIcons();
     const boardSize = parseBoardSize(localStorage.getItem("boardSize"));
-    currentPlayer = getInitialPlayer();
-    cards = createCards(boardSize);
-    renderBoard(boardSize);
-    updateHeaderState();
-    updateStatus(`${currentPlayer} beginnt.`);
+    const storedGameState = readStoredGameState();
+
+    if (canRestoreGameState(storedGameState, boardSize)) {
+        restoreGameState(storedGameState, boardSize);
+    } else {
+        startNewGame(boardSize);
+    }
+
+    persistGameState();
+    window.addEventListener("beforeunload", persistGameState);
     boardElement.addEventListener("click", onCardClick);
 }
 

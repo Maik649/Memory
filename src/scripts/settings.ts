@@ -67,10 +67,17 @@ const navPlayerValue = document.querySelector(
 const navBoardSizeValue = document.querySelector(
   '[data-settings-nav="board-size"] .settings-nav__value',
 ) as HTMLElement | null;
+const backToGameButton = document.querySelector(
+  "[data-back-to-game]",
+) as HTMLAnchorElement | null;
+const settingsHeader = document.querySelector(
+  ".settings-header",
+) as HTMLElement | null;
 
 const defaultTheme = "Code vibes theme";
 const defaultPlayer = "Blue";
 const defaultBoardSize = "16";
+const GAME_IN_PROGRESS_STORAGE_KEY = "memoryGameInProgress";
 const defaultPlayerIcons: Record<string, string> = {
   Blue: `${BASE}img/label_blue.svg`,
   Orange: `${BASE}img/label2.svg`,
@@ -158,8 +165,9 @@ function getAvailableThemes(): string[] {
 function applyTheme(theme: string) {
   if (themeSection) {
     themeSection.setAttribute("data-theme", theme);
-  } else {
-    document.documentElement.setAttribute("data-theme", theme);
+  }
+  if (settingsHeader) {
+    settingsHeader.setAttribute("data-theme", theme);
   }
 }
 
@@ -398,6 +406,34 @@ function bindSettingsListeners() {
 }
 
 /**
+ * Prueft, ob der Back-to-Game-Button angezeigt werden soll.
+ * @returns {boolean} True, wenn aktive Spielsession oder direkte Navigation aus dem Spiel.
+ */
+function shouldShowBackToGameButton(): boolean {
+  const fromGame = new URLSearchParams(window.location.search).get("fromGame");
+  const hasGameInProgress =
+    sessionStorage.getItem(GAME_IN_PROGRESS_STORAGE_KEY) === "true";
+  return fromGame === "1" || hasGameInProgress;
+}
+
+/**
+ * Steuert die Sichtbarkeit des Back-to-Game-Buttons.
+ * @returns {void}
+ */
+function initBackToGameButton() {
+  if (!backToGameButton) {
+    return;
+  }
+
+  if (shouldShowBackToGameButton()) {
+    backToGameButton.hidden = false;
+    return;
+  }
+
+  backToGameButton.hidden = true;
+}
+
+/**
  * Initialisiert das Verhalten der Settings-Seite, wenn Controls vorhanden sind.
  * @returns {void}
  */
@@ -406,6 +442,7 @@ function initSettings() {
     return;
   }
 
+  initBackToGameButton();
   const initialSelection = getInitialSelection();
   applyInitialSelection(initialSelection);
   bindSettingsListeners();

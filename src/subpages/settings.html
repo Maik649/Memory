@@ -9,9 +9,16 @@
 
     <body>
         <main>
-            <section aria-label="Settings page header">
+            <section class="settings-header" aria-label="Settings page header">
                 <h1 class="setting-h1">Settings</h1>
-               
+                <a
+                    href="./game.html"
+                    class="settings-back-button"
+                    data-back-to-game
+                    hidden
+                >
+                    Back to game
+                </a>
             </section>
 
             <section class="settings-content">
@@ -128,16 +135,16 @@
                             </li>
                             <li class="settings-nav__divider"></li>
                             <li class="settings-nav__item" data-settings-nav="player">
-                               <span class="settings-nav__value">Blue</span>
+                               <span>Player:</span><span class="settings-nav__value">Blue</span>
                             </li>
                             <li class="settings-nav__divider"></li>
                             <li class="settings-nav__item" data-settings-nav="board-size">
-                             <span class="settings-nav__value">16</span>
+                             <span>Board:</span><span class="settings-nav__value">16</span>
                             </li>
                         </ul>
                         <section class="setting-screen-buttons" aria-label="Start game action">
                             <a href="./game.html" class="button--settings">Play</a>
-                            <img class="button-icons --controller" src="../../public/img/smart-display.png" alt="" aria-hidden="true">
+                            <img class="button-icons --controller" src="../../public/img/smart-display.png" alt="" >
                         </section>
                     </nav>
                 </section>
