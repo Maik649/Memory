@@ -1,4 +1,4 @@
-export {};
+export { };
 
 const themeInputs = document.querySelectorAll('input[name="theme-radio-btn"]') as NodeListOf<HTMLInputElement>;
 const previewPanel = document.querySelector('.theme-section') as HTMLElement | null;
