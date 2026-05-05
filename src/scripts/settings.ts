@@ -70,6 +70,9 @@ const navBoardSizeValue = document.querySelector(
 const backToGameButton = document.querySelector(
   "[data-back-to-game]",
 ) as HTMLAnchorElement | null;
+const startButton = document.querySelector(
+  "[data-start-button]",
+) as HTMLAnchorElement | null;
 const settingsHeader = document.querySelector(
   ".settings-header",
 ) as HTMLElement | null;
@@ -134,18 +137,18 @@ function syncCheckedInput(inputs: NodeListOf<HTMLInputElement>, value: string) {
  * @returns {void}
  */
 function updateSettingsNavSelection(
-  theme: string,
-  player: string,
-  boardSize: string,
+  theme: string | null,
+  player: string | null,
+  boardSize: string | null,
 ) {
   if (navThemeValue) {
-    navThemeValue.textContent = theme;
+    navThemeValue.textContent = theme ?? "—";
   }
   if (navPlayerValue) {
-    navPlayerValue.textContent = player;
+    navPlayerValue.textContent = player ?? "—";
   }
   if (navBoardSizeValue) {
-    navBoardSizeValue.textContent = boardSize;
+    navBoardSizeValue.textContent = boardSize ?? "—";
   }
 }
 
@@ -309,11 +312,10 @@ function setBoardSize(boardSize: string): string {
  * @returns {void}
  */
 function updateSettingsNavFromInputs() {
-  updateSettingsNavSelection(
-    getCheckedValue(themeInputs, defaultTheme),
-    getCheckedValue(playerInputs, defaultPlayer),
-    getCheckedValue(boardSizeInputs, defaultBoardSize),
-  );
+  const checkedTheme = Array.from(themeInputs).find((i) => i.checked)?.value ?? null;
+  const checkedPlayer = Array.from(playerInputs).find((i) => i.checked)?.value ?? null;
+  const checkedBoardSize = Array.from(boardSizeInputs).find((i) => i.checked)?.value ?? null;
+  updateSettingsNavSelection(checkedTheme, checkedPlayer, checkedBoardSize);
 }
 
 /**
@@ -385,6 +387,7 @@ function bindInputChange(
       if (!input.checked) { return;}
       onCheckedChange(input.value);
       updateSettingsNavFromInputs();
+      updateStartButtonState();
     });
   });
 }
@@ -398,6 +401,7 @@ function bindSettingsListeners() {
   bindInputChange(themeInputs, (value) => {setTheme(value);});
   bindInputChange(playerInputs, (value) => {setPlayer(value);});
   bindInputChange(boardSizeInputs, (value) => {setBoardSize(value);});
+  bindStartButtonListener();
 }
 
 /**
@@ -428,6 +432,23 @@ function bindThemePreviewListeners() {
 }
 
 /**
+ * Prevents navigation if the start button is disabled.
+ * @returns {void}
+ */
+function bindStartButtonListener() {
+  if (!startButton) {
+    return;
+  }
+
+  startButton.addEventListener("click", (event) => {
+    if (startButton.hasAttribute("disabled")) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  });
+}
+
+/**
  * Checks whether the back-to-game button should be shown.
  * @returns {boolean} True when a game session is active or the page was opened from the game.
  */
@@ -436,6 +457,35 @@ function shouldShowBackToGameButton(): boolean {
   const hasGameInProgress =
     sessionStorage.getItem(GAME_IN_PROGRESS_STORAGE_KEY) === "true";
   return fromGame === "1" || hasGameInProgress;
+}
+
+/**
+ * Checks whether all required settings are selected.
+ * @returns {boolean} True if theme, player, and board size are all selected.
+ */
+function isAllSettingsSelected(): boolean {
+  const hasTheme = Array.from(themeInputs).some((input) => input.checked);
+  const hasPlayer = Array.from(playerInputs).some((input) => input.checked);
+  const hasBoardSize = Array.from(boardSizeInputs).some((input) => input.checked);
+  return hasTheme && hasPlayer && hasBoardSize;
+}
+
+/**
+ * Updates the start button enabled/disabled state based on settings selection.
+ * @returns {void}
+ */
+function updateStartButtonState(): void {
+  if (!startButton) {
+    return;
+  }
+
+  const isEnabled = isAllSettingsSelected();
+
+  if (isEnabled) {
+    startButton.removeAttribute("disabled");
+  } else {
+    startButton.setAttribute("disabled", "");
+  }
 }
 
 /**
@@ -461,8 +511,14 @@ function initSettings() {
   }
 
   initBackToGameButton();
-  const initialSelection = getInitialSelection();
-  applyInitialSelection(initialSelection);
   bindSettingsListeners();
+  updateSettingsNavFromInputs();
+  updateStartButtonState();
+
+  // Only restore previous selection if returning from an active game
+  if (shouldShowBackToGameButton()) {
+    const initialSelection = getInitialSelection();
+    applyInitialSelection(initialSelection);
+  }
 }
 initSettings();

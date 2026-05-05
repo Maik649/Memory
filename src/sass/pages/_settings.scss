@@ -346,6 +346,19 @@ label {
     transform: rotate(-10deg);
     transition: all 0.35s ease-in-out;
   }
+
+  &:has(.button--settings[disabled]) {
+    cursor: default;
+
+    &:hover {
+      padding: 0px 0px;
+    }
+
+    &:hover .button-icons.--controller {
+      transform: none;
+      transition: none;
+    }
+  }
 }
 
 .button--settings {
@@ -355,6 +368,12 @@ label {
   font-family: "Red Rose Bold", sans-serif;
   font-weight: fonts.$font-weight-bold;
   color: var(--color-text);
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }
 
 .theme-preview {
