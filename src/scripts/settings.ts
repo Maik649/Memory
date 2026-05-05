@@ -4,8 +4,8 @@ const BASE = import.meta.env.BASE_URL;
 
 /**
  * @interface ThemePreview
- * @property {string} card1 Pfad zum ersten Preview-Bild.
- * @property {string} card2 Pfad zum zweiten Preview-Bild.
+ * @property {string} card1 Path to the first preview image.
+ * @property {string} card2 Path to the second preview image.
  */
 interface ThemePreview {
   card1: string;
@@ -19,7 +19,7 @@ const themePreviewMap: Record<string, ThemePreview> = {
   },
   "Gaming theme": {
     card1: `${BASE}themes/gaming-card-1.png`,
-    card2: `${BASE}themes/gaming-card-2.png`,
+    card2: `${BASE}themes/gaming-card-3.png`,
   },
   "DA Projects theme": {
     card1: `${BASE}themes/da-projects-card-1.png`,
@@ -101,10 +101,10 @@ interface SettingsSelection {
 }
 
 /**
- * Liest den ausgewaehlten Wert einer Radio-Gruppe.
- * @param {NodeListOf<HTMLInputElement>} inputs Radio-Inputs der Gruppe.
- * @param {string} fallbackValue Rueckfallwert, falls nichts ausgewaehlt ist.
- * @returns {string} Ausgewaehlter oder Fallback-Wert.
+ * Reads the selected value of a radio group.
+ * @param {NodeListOf<HTMLInputElement>} inputs Radio inputs in the group.
+ * @param {string} fallbackValue Fallback value if nothing is selected.
+ * @returns {string} Selected or fallback value.
  */
 function getCheckedValue(
   inputs: NodeListOf<HTMLInputElement>,
@@ -115,9 +115,9 @@ function getCheckedValue(
 }
 
 /**
- * Synchronisiert eine Radio-Gruppe mit einem Zielwert.
- * @param {NodeListOf<HTMLInputElement>} inputs Radio-Inputs der Gruppe.
- * @param {string} value Zielwert.
+ * Syncs a radio group to a target value.
+ * @param {NodeListOf<HTMLInputElement>} inputs Radio inputs in the group.
+ * @param {string} value Target value.
  * @returns {void}
  */
 function syncCheckedInput(inputs: NodeListOf<HTMLInputElement>, value: string) {
@@ -127,10 +127,10 @@ function syncCheckedInput(inputs: NodeListOf<HTMLInputElement>, value: string) {
 }
 
 /**
- * Aktualisiert die Zusammenfassung in der Settings-Navigation.
- * @param {string} theme Aktuelles Theme.
- * @param {string} player Aktueller Spieler.
- * @param {string} boardSize Aktuelle Board-Groesse.
+ * Updates the summary in the settings navigation.
+ * @param {string} theme Current theme.
+ * @param {string} player Current player.
+ * @param {string} boardSize Current board size.
  * @returns {void}
  */
 function updateSettingsNavSelection(
@@ -150,16 +150,16 @@ function updateSettingsNavSelection(
 }
 
 /**
- * Liefert alle verfuegbaren Theme-Namen aus den Radio-Optionen.
- * @returns {string[]} Liste aller Theme-Namen.
+ * Returns all available theme names from the radio options.
+ * @returns {string[]} List of all theme names.
  */
 function getAvailableThemes(): string[] {
   return Array.from(themeInputs).map((input) => input.value);
 }
 
 /**
- * Wendet ein Theme auf den Preview-Bereich an.
- * @param {string} theme Theme-Name.
+ * Applies a theme to the preview area.
+ * @param {string} theme Theme name.
  * @returns {void}
  */
 function applyTheme(theme: string) {
@@ -172,8 +172,8 @@ function applyTheme(theme: string) {
 }
 
 /**
- * Aktualisiert die Vorschau-Kartenbilder fuer das ausgewaehlte Theme.
- * @param {string} theme Theme-Name.
+ * Updates the preview card images for the selected theme.
+ * @param {string} theme Theme name.
  * @returns {void}
  */
 function applyPreviewImages(theme: string) {
@@ -191,17 +191,17 @@ function applyPreviewImages(theme: string) {
 }
 
 /**
- * Liefert das Icon-Mapping fuer ein Theme.
- * @param {string} theme Theme-Name.
- * @returns {Record<string, string>} Mapping fuer Spieler-Icons.
+ * Returns the icon mapping for a theme.
+ * @param {string} theme Theme name.
+ * @returns {Record<string, string>} Player icon mapping.
  */
 function getPlayerIconsForTheme(theme: string): Record<string, string> {
   return playerIconsByTheme[theme] ?? defaultPlayerIcons;
 }
 
 /**
- * Aktualisiert beide Score-Icons in der Vorschau.
- * @param {Record<string, string>} playerIcons Icon-Mapping je Spieler.
+ * Updates both score icons in the preview.
+ * @param {Record<string, string>} playerIcons Icon mapping per player.
  * @returns {void}
  */
 function updatePreviewScoreIcons(playerIcons: Record<string, string>) {
@@ -217,9 +217,9 @@ function updatePreviewScoreIcons(playerIcons: Record<string, string>) {
 }
 
 /**
- * Aktualisiert das Icon des aktuell ausgewaehlten Spielers in der Vorschau.
- * @param {Record<string, string>} playerIcons Icon-Mapping je Spieler.
- * @param {string} selectedPlayer Aktuell ausgewaehlter Spieler.
+ * Updates the icon of the currently selected player in the preview.
+ * @param {Record<string, string>} playerIcons Icon mapping per player.
+ * @param {string} selectedPlayer Currently selected player.
  * @returns {void}
  */
 function updateCurrentPreviewPlayerIcon(
@@ -236,8 +236,8 @@ function updateCurrentPreviewPlayerIcon(
 }
 
 /**
- * Setzt den Spieler-Status auf dem Preview-Wrapper fuer CSS-Hooks.
- * @param {string} selectedPlayer Aktuell ausgewaehlter Spieler.
+ * Sets the player state on the preview wrapper for CSS hooks.
+ * @param {string} selectedPlayer Currently selected player.
  * @returns {void}
  */
 function updateCurrentPreviewPlayerWrapper(selectedPlayer: string) {
@@ -247,9 +247,9 @@ function updateCurrentPreviewPlayerWrapper(selectedPlayer: string) {
 }
 
 /**
- * Wendet alle spielerbezogenen Vorschau-Icons fuer ein Theme an.
- * @param {string} theme Theme-Name.
- * @param {string} selectedPlayer Aktuell ausgewaehlter Spieler.
+ * Applies all player-related preview icons for a theme.
+ * @param {string} theme Theme name.
+ * @param {string} selectedPlayer Currently selected player.
  * @returns {void}
  */
 function applyPreviewPlayerIcons(theme: string, selectedPlayer: string) {
@@ -260,22 +260,31 @@ function applyPreviewPlayerIcons(theme: string, selectedPlayer: string) {
 }
 
 /**
- * Setzt und speichert die Theme-Auswahl.
- * @param {string} theme Theme-Name.
- * @returns {string} Das gesetzte Theme.
+ * Applies a theme and its related preview elements without persisting it.
+ * @param {string} theme Theme name.
+ * @returns {void}
  */
-function setTheme(theme: string): string {
+function applyThemePreview(theme: string) {
   applyTheme(theme);
   applyPreviewImages(theme);
   applyPreviewPlayerIcons(theme, getCheckedValue(playerInputs, defaultPlayer));
+}
+
+/**
+ * Sets and stores the selected theme.
+ * @param {string} theme Theme name.
+ * @returns {string} The applied theme.
+ */
+function setTheme(theme: string): string {
+  applyThemePreview(theme);
   localStorage.setItem("theme", theme);
   return theme;
 }
 
 /**
- * Setzt und speichert die Spieler-Auswahl.
- * @param {string} player Spielername.
- * @returns {string} Der gesetzte Spieler.
+ * Sets and stores the player selection.
+ * @param {string} player Player name.
+ * @returns {string} The applied player.
  */
 function setPlayer(player: string): string {
   const theme = localStorage.getItem("theme") ?? defaultTheme;
@@ -286,9 +295,9 @@ function setPlayer(player: string): string {
 }
 
 /**
- * Speichert die Board-Groesse.
- * @param {string} boardSize Board-Groesse als String.
- * @returns {string} Die gesetzte Board-Groesse.
+ * Stores the board size.
+ * @param {string} boardSize Board size as a string.
+ * @returns {string} The applied board size.
  */
 function setBoardSize(boardSize: string): string {
   localStorage.setItem("boardSize", boardSize);
@@ -296,7 +305,7 @@ function setBoardSize(boardSize: string): string {
 }
 
 /**
- * Aktualisiert die Navigations-Zusammenfassung aus dem aktuellen Input-Status.
+ * Updates the navigation summary from the current input state.
  * @returns {void}
  */
 function updateSettingsNavFromInputs() {
@@ -308,11 +317,11 @@ function updateSettingsNavFromInputs() {
 }
 
 /**
- * Liest einen gespeicherten Wert und validiert ihn gegen vorhandene Inputs.
- * @param {string} storageKey Local-Storage-Key.
- * @param {NodeListOf<HTMLInputElement>} inputs Verfuegbare Input-Optionen.
- * @param {string} fallbackValue Rueckfallwert.
- * @returns {string} Valider gespeicherter Wert oder Fallback.
+ * Reads a stored value and validates it against available inputs.
+ * @param {string} storageKey Local storage key.
+ * @param {NodeListOf<HTMLInputElement>} inputs Available input options.
+ * @param {string} fallbackValue Fallback value.
+ * @returns {string} Valid stored value or fallback.
  */
 function getStoredSelectionValue(
   storageKey: string,
@@ -327,8 +336,8 @@ function getStoredSelectionValue(
 }
 
 /**
- * Baut die initiale Settings-Auswahl aus Storage-Werten und Defaults.
- * @returns {SettingsSelection} Initiale Auswahl.
+ * Builds the initial settings selection from storage values and defaults.
+ * @returns {SettingsSelection} Initial selection.
  */
 function getInitialSelection(): SettingsSelection {
   const availableThemes = getAvailableThemes();
@@ -336,9 +345,7 @@ function getInitialSelection(): SettingsSelection {
 
   return {
     theme:
-      storedTheme && availableThemes.includes(storedTheme)
-        ? storedTheme
-        : defaultTheme,
+      storedTheme && availableThemes.includes(storedTheme) ? storedTheme : defaultTheme,
     player: getStoredSelectionValue("player", playerInputs, defaultPlayer),
     boardSize: getStoredSelectionValue(
       "boardSize",
@@ -349,8 +356,8 @@ function getInitialSelection(): SettingsSelection {
 }
 
 /**
- * Wendet die initialen Settings auf Inputs, Preview und Summary an.
- * @param {SettingsSelection} selection Initiale Auswahlwerte.
+ * Applies the initial settings to inputs, preview, and summary.
+ * @param {SettingsSelection} selection Initial selection values.
  * @returns {void}
  */
 function applyInitialSelection(selection: SettingsSelection) {
@@ -360,17 +367,13 @@ function applyInitialSelection(selection: SettingsSelection) {
   syncCheckedInput(playerInputs, selection.player);
   setBoardSize(selection.boardSize);
   syncCheckedInput(boardSizeInputs, selection.boardSize);
-  updateSettingsNavSelection(
-    selection.theme,
-    selection.player,
-    selection.boardSize,
-  );
+  updateSettingsNavSelection(selection.theme, selection.player, selection.boardSize);
 }
 
 /**
- * Bindet einen wiederverwendbaren Change-Handler an eine Radio-Gruppe.
- * @param {NodeListOf<HTMLInputElement>} inputs Radio-Inputs.
- * @param {(value: string) => void} onCheckedChange Callback bei ausgewaehltem Wert.
+ * Attaches a reusable change handler to a radio group.
+ * @param {NodeListOf<HTMLInputElement>} inputs Radio inputs.
+ * @param {(value: string) => void} onCheckedChange Callback for the selected value.
  * @returns {void}
  */
 function bindInputChange(
@@ -379,10 +382,7 @@ function bindInputChange(
 ) {
   inputs.forEach((input) => {
     input.addEventListener("change", () => {
-      if (!input.checked) {
-        return;
-      }
-
+      if (!input.checked) { return;}
       onCheckedChange(input.value);
       updateSettingsNavFromInputs();
     });
@@ -390,24 +390,46 @@ function bindInputChange(
 }
 
 /**
- * Verknuepft alle Listener fuer die Settings-Inputs.
+ * Wires all listeners for the settings inputs.
  * @returns {void}
  */
 function bindSettingsListeners() {
-  bindInputChange(themeInputs, (value) => {
-    setTheme(value);
-  });
-  bindInputChange(playerInputs, (value) => {
-    setPlayer(value);
-  });
-  bindInputChange(boardSizeInputs, (value) => {
-    setBoardSize(value);
+  bindThemePreviewListeners();
+  bindInputChange(themeInputs, (value) => {setTheme(value);});
+  bindInputChange(playerInputs, (value) => {setPlayer(value);});
+  bindInputChange(boardSizeInputs, (value) => {setBoardSize(value);});
+}
+
+/**
+ * Enables theme preview on hover and focus, then restores it on exit.
+ * @returns {void}
+ */
+function bindThemePreviewListeners() {
+  const restoreSelectedThemePreview = () => {
+    applyThemePreview(getCheckedValue(themeInputs, defaultTheme));
+  };
+
+  themeInputs.forEach((input) => {
+    const previewTheme = () => {
+      applyThemePreview(input.value);
+    };
+    const inputContainer = input.closest(".input-container");
+
+    if (inputContainer) {
+      inputContainer.addEventListener("mouseenter", previewTheme);
+      inputContainer.addEventListener("mouseleave", restoreSelectedThemePreview);
+    } else {
+      input.addEventListener("mouseenter", previewTheme);
+      input.addEventListener("mouseleave", restoreSelectedThemePreview);
+    }
+    input.addEventListener("focus", previewTheme);
+    input.addEventListener("blur", restoreSelectedThemePreview);
   });
 }
 
 /**
- * Prueft, ob der Back-to-Game-Button angezeigt werden soll.
- * @returns {boolean} True, wenn aktive Spielsession oder direkte Navigation aus dem Spiel.
+ * Checks whether the back-to-game button should be shown.
+ * @returns {boolean} True when a game session is active or the page was opened from the game.
  */
 function shouldShowBackToGameButton(): boolean {
   const fromGame = new URLSearchParams(window.location.search).get("fromGame");
@@ -417,24 +439,20 @@ function shouldShowBackToGameButton(): boolean {
 }
 
 /**
- * Steuert die Sichtbarkeit des Back-to-Game-Buttons.
+ * Controls the visibility of the back-to-game button.
  * @returns {void}
  */
 function initBackToGameButton() {
-  if (!backToGameButton) {
-    return;
-  }
+  if (!backToGameButton) {return;}
 
   if (shouldShowBackToGameButton()) {
-    backToGameButton.hidden = false;
-    return;
-  }
+    backToGameButton.hidden = false;return;}
 
   backToGameButton.hidden = true;
 }
 
 /**
- * Initialisiert das Verhalten der Settings-Seite, wenn Controls vorhanden sind.
+ * Initializes the settings page behavior when controls are present.
  * @returns {void}
  */
 function initSettings() {
@@ -447,5 +465,4 @@ function initSettings() {
   applyInitialSelection(initialSelection);
   bindSettingsListeners();
 }
-
 initSettings();

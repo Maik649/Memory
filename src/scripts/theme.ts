@@ -5,16 +5,16 @@ const previewPanel = document.querySelector('.theme-section') as HTMLElement | n
 const defaultTheme = "Code vibes theme";
 
 /**
- * Liest alle verfuegbaren Theme-Werte aus den Radio-Inputs.
- * @returns {string[]} Liste aller Theme-Namen.
+ * Reads all available theme values from the radio inputs.
+ * @returns {string[]} List of all theme names.
  */
 function getAvailableThemes(): string[] {
     return Array.from(themeInputs).map((input) => input.value);
 }
 
 /**
- * Wendet ein Theme am Preview-Container oder am Dokument an.
- * @param {string} theme Ausgewaehlter Theme-Name.
+ * Applies a theme to the preview container or the document.
+ * @param {string} theme Selected theme name.
  * @returns {void}
  */
 function applyTheme(theme: string) {
@@ -26,9 +26,9 @@ function applyTheme(theme: string) {
 }
 
 /**
- * Speichert und setzt das aktuell ausgewaehlte Theme.
- * @param {string} theme Ausgewaehlter Theme-Name.
- * @returns {string} Das gesetzte Theme.
+ * Stores and applies the currently selected theme.
+ * @param {string} theme Selected theme name.
+ * @returns {string} The applied theme.
  */
 function setTheme(theme: string): string {
     applyTheme(theme);
@@ -37,8 +37,8 @@ function setTheme(theme: string): string {
 }
 
 /**
- * Synchronisiert die Radio-Buttons mit dem aktiven Theme.
- * @param {string} theme Aktives Theme.
+ * Syncs the radio buttons with the active theme.
+ * @param {string} theme Active theme.
  * @returns {void}
  */
 function syncCheckedTheme(theme: string) {
@@ -48,7 +48,7 @@ function syncCheckedTheme(theme: string) {
 }
 
 /**
- * Initialisiert die Theme-Auswahl aus Local Storage und bindet Listener.
+ * Initializes theme selection from local storage and binds listeners.
  * @returns {void}
  */
 function initTheme() {
