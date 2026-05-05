@@ -437,10 +437,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  &::backdrop {
-    background: color-mix(in srgb, var(--color-primary-bg) 72%, #000 28%);
-  }
 }
 
 .exit-dialog__card {
