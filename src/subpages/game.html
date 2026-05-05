@@ -5,6 +5,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Memory Game</title>
+        <link rel="icon" type="image/png" href="/Memory-Spiel/favicons/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/Memory-Spiel/favicons/favicon.svg" />
+        <link rel="shortcut icon" href="/Memory-Spiel/favicons/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/Memory-Spiel/favicons/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="Memory" />
+        <link rel="manifest" href="/Memory-Spiel/favicons/site.webmanifest" />
     </head>
 
     <body class="game-page">
@@ -33,7 +39,7 @@
                     <nav class="button-content" aria-label="Game actions">
                         <div class="exit-btn">
                             <span class="exit-btn__icon" aria-hidden="true"></span>
-                            <a href="./settings.html?fromGame=1" class="button">Exit game</a>
+                            <button type="button" data-exit-game-trigger>Exit game</button>
                         </div>
                     </nav>
                 </header>
@@ -79,6 +85,25 @@
                 <img class="winner-draw-icon" data-winner-draw-icon src="/img/chess-pawn.svg" alt="" aria-hidden="true" hidden>
             </article>
         </aside>
+
+        <dialog
+            class="exit-dialog"
+            data-exit-dialog
+            aria-labelledby="exit-dialog-title"
+        >
+            <div class="exit-dialog__card">
+                <h2 id="exit-dialog-title" class="exit-dialog__title">Exit game?</h2>
+                <p class="exit-dialog__text">Your current match will be closed.</p>
+                <div class="button-content exit-dialog__actions">
+                    <div class="exit-btn">
+                        <button type="button" data-exit-dialog-close>Back to game</button>
+                    </div>
+                    <div class="exit-btn">
+                        <button type="button" data-exit-dialog-confirm>Exit game</button>
+                    </div>
+                </div>
+            </div>
+        </dialog>
 
         <script type="module" src="/src/main.ts"></script>
     </body>
