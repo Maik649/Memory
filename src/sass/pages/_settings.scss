@@ -3,6 +3,17 @@
 @use "../abstract/mixings" as resp;
 @use "../abstract/mixings" as flex-center;
 @use "../abstract/mixings" as animat;
+
+.settings-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: min(100%, 1440px);
+  padding-inline: clamp(16px, 4vw, 48px);
+  box-sizing: border-box;
+}
+
 h1 {
   font-size: 56px;
   color: fonts.$font-color-light;
@@ -12,20 +23,23 @@ h1 {
 }
 
 .setting-h1 {
+  position: relative;
+  display: inline-block;
   color: vars.$h1-color;
 
   &::after {
     content: "";
     position: absolute;
     display: block;
+    top: 100%;
+    left: 0;
     background-image: url("/img/line-3.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: left top;
     width: 250px;
-    left: 70px;
     height: 58px;
-    margin-top: -10px;
+    margin-top: 8px;
   }
 }
 
@@ -33,7 +47,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90vw;
+  width: 100%;
 }
 
 .settings-back-button {
@@ -82,7 +96,7 @@ h1 {
 .settings-content {
   @include resp.fex-left();
   flex-direction: row;
-  width: 90vw;
+  width: 100%;
   height: 100%;
   color: var(--color-text);
 }
@@ -269,7 +283,7 @@ label {
   height: 80px;
   margin-top: auto;
   width: 100%;
-  max-width: 930px;
+  max-width: 900px;
   background-color: rgb(246, 246, 246);
 
   &__list {
@@ -283,7 +297,8 @@ label {
     font-family: fonts.$font-family;
     font-size: 18px;
     color: var(--color-text);
-    width: 150px;
+    min-width: auto;
+    max-width: 230px;
   }
 
   &__divider {
